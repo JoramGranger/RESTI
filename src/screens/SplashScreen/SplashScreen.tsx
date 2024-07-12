@@ -2,15 +2,22 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Animated, { Easing, useSharedValue, useAnimatedStyle, interpolate, withTiming } from 'react-native-reanimated';
-import colors from '../../styles/colors';
+import palette1 from '../../styles/paletteOne';
+import palette2 from '../../styles/paletteTwo';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation hook
 
 const SplashScreen = () => {
   const animatedValue = useSharedValue(0);
+  const navigation = useNavigation();
 
   useEffect(() => {
     animatedValue.value = withTiming(1, {
+      toValue: 1,
       duration: 4000,
       easing: Easing.linear,
+      useNativeDriver: true,
+    }).then(() => {
+      navigation.navigate('HomeScreen');
     });
   }, []);
 
@@ -36,19 +43,19 @@ const SplashScreen = () => {
     <Animated.View style={[styles.container]}>
       <View style={styles.centerContainer}>
         <View style={styles.colorLines}>
-          <Animated.View style={[styles.colorLine, { backgroundColor: colors.primary }, waveAnimation(0)]}>
+          <Animated.View style={[styles.colorLine, { backgroundColor: palette2.primaryPassionPink }, waveAnimation(0)]}>
             <Animated.Text style={[styles.letter, letterOpacity(0)]}>R</Animated.Text>
           </Animated.View>
-          <Animated.View style={[styles.colorLine, { backgroundColor: colors.secondaryYellow }, waveAnimation(1)]}>
+          <Animated.View style={[styles.colorLine, { backgroundColor: palette2.secondaryOceanBlue }, waveAnimation(1)]}>
             <Animated.Text style={[styles.letter, letterOpacity(1)]}>E</Animated.Text>
           </Animated.View>
-          <Animated.View style={[styles.colorLine, { backgroundColor: colors.secondaryCoral }, waveAnimation(2)]}>
+          <Animated.View style={[styles.colorLine, { backgroundColor: palette2.secondarySkyBlue }, waveAnimation(2)]}>
             <Animated.Text style={[styles.letter, letterOpacity(2)]}>S</Animated.Text>
           </Animated.View>
-          <Animated.View style={[styles.colorLine, { backgroundColor: colors.secondaryPurple }, waveAnimation(3)]}>
+          <Animated.View style={[styles.colorLine, { backgroundColor: palette2.secondarySandstone }, waveAnimation(3)]}>
             <Animated.Text style={[styles.letter, letterOpacity(3)]}>T</Animated.Text>
           </Animated.View>
-          <Animated.View style={[styles.colorLine, { backgroundColor: colors.secondaryBlue }, waveAnimation(4)]}>
+          <Animated.View style={[styles.colorLine, { backgroundColor: palette2.secondaryRosewood }, waveAnimation(4)]}>
             <Animated.Text style={[styles.letter, letterOpacity(4)]}>I</Animated.Text>
           </Animated.View>
         </View>
@@ -62,7 +69,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.white, // White background
+    backgroundColor: palette2.white, // White background
   },
   centerContainer: {
     flex: 1,
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
   letter: {
     fontSize: 24, // Adjust letter size
     fontWeight: 'bold',
-    color: colors.white,
+    color: palette2.white,
     position: 'absolute',
     top: '50%', // Center vertically
     left: '50%', // Center horizontally

@@ -1,6 +1,6 @@
 // globalStyles.js
 import { StyleSheet } from 'react-native';
-import colors from './colors';
+import colors from './paletteOne';
 
 export default StyleSheet.create({
   container: {
